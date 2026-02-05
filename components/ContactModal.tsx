@@ -1,27 +1,87 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Loader2, CheckCircle, ArrowRight } from 'lucide-react';
-import { cn } from '../lib/utils.ts';
+import { X, Loader2, CheckCircle, ArrowRight, ShieldCheck } from 'lucide-react';
 
 interface ContactModalProps {
   isOpen: boolean;
   onClose: () => void;
+  mode: 'audit' | 'apply'; // New prop to handle dual-intent
 }
 
-export const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
+export const ContactModal = ({ isOpen, onClose, mode }: ContactModalProps) => {
   const [step, setStep] = useState<'form' | 'submitting' | 'success'>('form');
+  const [loadingIndex, setLoadingIndex] = useState(0);
+  const [protocolId, setProtocolId] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // Theatrical loading messages
+  const loadingMessages = [
+    "Scanning Domain Infrastructure...",
+    "Mapping Local Competitor Rankings...",
+    "Quantifying Conversion Leakage...",
+    "Finalizing Growth Protocol..."
+  ];
+
+  // Dynamic content based on button clicked
+  const content = {
+    audit: {
+      title: "Request Audit",
+      sub: "We limit partners to 3 per region. Enter your details to check availability.",
+      btn: "Run Analysis",
+      subject: "New LocalLeadBot Audit Request!"
+    },
+    apply: {
+      title: "Partnership Intake",
+      sub: "Exclusivity guaranteed for selected firms. Apply for territory dominance.",
+      btn: "Submit Application",
+      subject: "New LocalLeadBot Partnership Application!"
+    }
+  };
+
+  // Cycle through loading messages
+  useEffect(() => {
+    if (step === 'submitting') {
+      const interval = setInterval(() => {
+        setLoadingIndex((prev) => (prev + 1) % loadingMessages.length);
+      }, 800);
+      return () => clearInterval(interval);
+    }
+  }, [step]);
+
+  // Generate a Reference ID on success
+  const generateId = () => {
+    const random = Math.floor(1000 + Math.random() * 9000);
+    setProtocolId(`PX-${random}-LLM`);
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setStep('submitting');
-    // Simulate network request
-    setTimeout(() => {
-      setStep('success');
-    }, 1500);
+
+    const formData = new FormData(e.currentTarget);
+    
+    try {
+      const response = await fetch("https://formspree.io/f/mvgqyrkg", {
+        method: "POST",
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (response.ok) {
+        generateId();
+        setStep('success');
+      } else {
+        alert("The Engine encountered an error. Please try again.");
+        setStep('form');
+      }
+    } catch (error) {
+      console.error("Submission error:", error);
+      setStep('form');
+    }
   };
 
   const reset = () => {
     setStep('form');
+    setLoadingIndex(0);
     onClose();
   };
 
@@ -29,7 +89,6 @@ export const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
     <AnimatePresence>
       {isOpen && (
         <>
-          {/* Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -38,7 +97,6 @@ export const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
             className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[100]"
           />
 
-          {/* Modal Container */}
           <div className="fixed inset-0 z-[101] flex items-center justify-center p-4 pointer-events-none">
             <motion.div
               initial={{ scale: 0.95, opacity: 0, y: 20 }}
@@ -46,11 +104,7 @@ export const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
               exit={{ scale: 0.95, opacity: 0, y: 20 }}
               className="w-full max-w-md bg-[#0A0A0A] border border-white/10 rounded-2xl shadow-2xl overflow-hidden pointer-events-auto relative"
             >
-              {/* Close Button */}
-              <button 
-                onClick={reset}
-                className="absolute top-4 right-4 text-gray-500 hover:text-white transition-colors"
-              >
+              <button onClick={reset} className="absolute top-4 right-4 text-gray-500 hover:text-white transition-colors">
                 <X size={20} />
               </button>
 
@@ -58,15 +112,17 @@ export const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
                 {step === 'form' && (
                   <form onSubmit={handleSubmit} className="flex flex-col gap-4">
                     <div className="mb-2">
-                      <h2 className="text-2xl font-display font-bold text-white mb-2">Request Audit</h2>
-                      <p className="text-sm text-gray-400">
-                        We limit partners to 3 per region. Enter your details to check availability for your area.
-                      </p>
+                      <h2 className="text-2xl font-display font-bold text-white mb-2">{content[mode].title}</h2>
+                      <p className="text-sm text-gray-400">{content[mode].sub}</p>
                     </div>
 
+                    <input type="hidden" name="_subject" value={content[mode].subject} />
+                    <input type="hidden" name="intent_mode" value={mode} />
+
                     <div>
-                      <label className="block text-xs font-medium text-gray-500 mb-1.5 uppercase tracking-wider">Business URL</label>
+                      <label className="block text-xs font-medium text-gray-500 mb-1.5 uppercase tracking-wider font-mono">Business URL</label>
                       <input 
+                        name="website"
                         required 
                         type="url" 
                         placeholder="https://example.com"
@@ -75,8 +131,9 @@ export const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
                     </div>
 
                     <div>
-                      <label className="block text-xs font-medium text-gray-500 mb-1.5 uppercase tracking-wider">Work Email</label>
+                      <label className="block text-xs font-medium text-gray-500 mb-1.5 uppercase tracking-wider font-mono">Work Email</label>
                       <input 
+                        name="email"
                         required 
                         type="email" 
                         placeholder="you@company.com"
@@ -86,9 +143,9 @@ export const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
 
                     <button 
                       type="submit"
-                      className="mt-2 w-full bg-white text-black font-bold py-3 rounded-lg hover:bg-gray-200 transition-colors flex items-center justify-center gap-2 group"
+                      className="mt-2 w-full bg-gradient-to-r from-[#D4AF37] to-[#8A6D3B] text-black font-bold py-3 rounded-lg hover:brightness-110 transition-all flex items-center justify-center gap-2 group shadow-[0_0_20px_rgba(212,175,55,0.2)]"
                     >
-                      Run Analysis
+                      {content[mode].btn}
                       <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </button>
                   </form>
@@ -98,7 +155,14 @@ export const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
                   <div className="py-12 flex flex-col items-center justify-center text-center">
                     <Loader2 className="w-10 h-10 text-amber-500 animate-spin mb-4" />
                     <p className="text-white font-medium">Connecting to Engine...</p>
-                    <p className="text-sm text-gray-500 mt-1">Analyzing traffic patterns</p>
+                    <motion.p 
+                      key={loadingIndex}
+                      initial={{ opacity: 0, y: 5 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="text-xs text-amber-500/70 mt-2 font-mono uppercase tracking-widest"
+                    >
+                      {loadingMessages[loadingIndex]}
+                    </motion.p>
                   </div>
                 )}
 
@@ -108,21 +172,27 @@ export const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
                       <CheckCircle className="w-8 h-8 text-green-500" />
                     </div>
                     <h3 className="text-2xl font-display font-bold text-white mb-2">Request Received</h3>
-                    <p className="text-gray-400 mb-6 max-w-[280px]">
-                      Your site has been queued for analysis. A senior strategist will reach out within 24 hours.
+                    <p className="text-gray-400 mb-4 max-w-[280px]">
+                      Your site has been queued for analysis. A strategist will contact you within 24 hours.
                     </p>
+                    
+                    {/* Protocol ID Badge */}
+                    <div className="mb-6 px-3 py-1 bg-white/5 rounded border border-white/10 flex items-center gap-2">
+                       <ShieldCheck className="w-3 h-3 text-amber-500" />
+                       <span className="text-[10px] font-mono text-gray-500 tracking-tighter">PROTOCOL ID: {protocolId}</span>
+                    </div>
+
                     <button 
                       onClick={reset}
-                      className="text-sm text-white hover:text-amber-400 transition-colors"
+                      className="text-sm text-[#D4AF37] hover:text-white transition-colors underline underline-offset-4"
                     >
-                      Close
+                      Return to Command Center
                     </button>
                   </div>
                 )}
               </div>
               
-              {/* Bottom decorative line */}
-              <div className="h-1 w-full bg-gradient-to-r from-amber-500 via-yellow-500 to-orange-500 opacity-20" />
+              <div className="h-1.5 w-full bg-gradient-to-r from-amber-600 via-amber-400 to-amber-600 opacity-30" />
             </motion.div>
           </div>
         </>
