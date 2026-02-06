@@ -5,11 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
     <title>LocalLeadBot | The Digital Growth Engine</title>
-    
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://cdn.tailwindcss.com">
     
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
@@ -28,45 +30,50 @@
               accent: '#D4AF37', // Executive Gold
             },
             animation: {
-              'shimmer': 'shimmer 2s linear infinite',
-              'beam': 'beam 2s linear infinite',
               'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-            },
-            keyframes: {
-              shimmer: {
-                from: { backgroundPosition: '0 0' },
-                to: { backgroundPosition: '-200% 0' },
-              },
-              beam: {
-                '0%': { transform: 'translateY(-100%)', opacity: '0' },
-                '50%': { opacity: '1' },
-                '100%': { transform: 'translateY(100%)', opacity: '0' },
-              }
             }
           }
         }
       }
     </script>
+
     <style>
       body {
         background-color: #030303;
         color: #ffffff;
         overflow-x: hidden;
       }
-      /* Custom Scrollbar */
-      ::-webkit-scrollbar {
-        width: 8px;
+
+      /* Optimized Shimmer: Uses transform (composited) to avoid Lighthouse penalties */
+      .shimmer {
+        position: relative;
+        overflow: hidden;
       }
-      ::-webkit-scrollbar-track {
-        background: #030303; 
+      .shimmer::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        transform: translateX(-100%);
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(212, 175, 55, 0.1),
+          transparent
+        );
+        animation: shimmer-fast 2s infinite;
       }
-      ::-webkit-scrollbar-thumb {
+      @keyframes shimmer-fast {
+        100% { transform: translateX(100%); }
+      }
+
+      /* Custom Executive Scrollbar */
+      ::-webkit-scrollbar { width: 8px; }
+      ::-webkit-scrollbar-track { background: #030303; }
+      ::-webkit-scrollbar-thumb { 
         background: #333; 
-        border-radius: 4px;
+        border-radius: 4px; 
       }
-      ::-webkit-scrollbar-thumb:hover {
-        background: #555; 
-      }
+      ::-webkit-scrollbar-thumb:hover { background: #555; }
       
       .glass {
         background: rgba(10, 10, 10, 0.7);
