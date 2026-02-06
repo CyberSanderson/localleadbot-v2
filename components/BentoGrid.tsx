@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { cn } from '../lib/utils.ts';
 import { Bot, LineChart, Globe, Target, ArrowUpRight } from 'lucide-react';
+import { RevenueLedger } from './RevenueLedger.tsx'; // Ensure this file exists in your components folder
 
 const Card = ({
   className,
@@ -42,12 +43,17 @@ const Card = ({
               {title}
             </h3>
           </div>
-          <p className="text-sm text-secondary leading-relaxed max-w-[90%]">
+          <p className="text-sm text-secondary leading-relaxed max-w-[90%] md:max-w-[70%]">
             {description}
           </p>
         </div>
         
-        {pattern && <div className="absolute right-0 bottom-0 opacity-20 group-hover:opacity-40 transition-opacity duration-500">{pattern}</div>}
+        {/* Dynamic Pattern / Revenue Ledger Area */}
+        {pattern && (
+          <div className="absolute right-0 bottom-0 pointer-events-none opacity-40 group-hover:opacity-100 transition-opacity duration-700">
+            {pattern}
+          </div>
+        )}
 
         <div className="flex items-center text-xs font-medium text-gray-500 group-hover:text-white transition-colors">
             See protocol <ArrowUpRight className="ml-1 w-3 h-3" />
@@ -75,7 +81,7 @@ export const BentoGrid = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[320px]">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[340px]">
           
           <Card
             large
@@ -84,21 +90,21 @@ export const BentoGrid = () => {
             description="Our proprietary LocalLeadBot doesn't just chat—it qualifies, books appointments, and closes deals while your competitors sleep. No missed calls, no lost revenue."
             icon={Bot}
             pattern={
-              <div className="w-48 h-32 bg-gradient-to-t from-amber-500/20 to-transparent blur-2xl transform rotate-12 translate-y-10 translate-x-10" />
+              <div className="w-64 h-48 bg-gradient-to-t from-amber-500/20 to-transparent blur-3xl transform rotate-12 translate-y-10 translate-x-10" />
             }
           />
           
           <Card
             title="Next-Gen Revenue Hubs"
             subtitle="CONVERT"
-            description="Ultra-fast, SEO-dominant Next.js infrastructure built with one goal: ROI. We don't just design for beauty; we design for the bank account. Our sites are optimized for local search dominance and high-ticket lead conversion."
+            description="Ultra-fast, SEO-dominant Next.js infrastructure built with one goal: ROI. Optimized for local search dominance and high-ticket conversion."
             icon={Globe}
           />
 
           <Card
             title="Territory Domination"
             subtitle="CONQUER"
-            description="We weaponize local SEO to ensure your firm owns the 'Map Pack' for every high-value keyword in your specific service radius."
+            description="We weaponize local SEO to ensure your firm owns the 'Map Pack' for every high-value keyword in your specific radius."
             icon={Target}
           />
 
@@ -109,12 +115,11 @@ export const BentoGrid = () => {
             description="Stop paying for 'clicks' and 'impressions'. Our transparent dashboard tracks real revenue generated, connecting every marketing dollar to a closed deal in your CRM."
             icon={LineChart}
             pattern={
-                <div className="flex gap-2 items-end translate-y-8 translate-x-8 opacity-50">
-                    <div className="w-4 h-12 bg-amber-500/20 rounded-t-sm" />
-                    <div className="w-4 h-20 bg-amber-500/40 rounded-t-sm" />
-                    <div className="w-4 h-32 bg-amber-500/60 rounded-t-sm" />
-                    <div className="w-4 h-24 bg-amber-500/30 rounded-t-sm" />
+              <div className="w-[320px] md:w-[400px] h-full p-4 overflow-hidden mask-gradient-b">
+                <div className="scale-75 md:scale-90 origin-top-right">
+                   <RevenueLedger />
                 </div>
+              </div>
             }
           />
         </div>

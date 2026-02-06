@@ -1,37 +1,25 @@
 /** @type {import('tailwindcss').Config} */
-export default {
+module.exports = {
   content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
+    "./src/**/*.{js,jsx,ts,tsx,html}",
   ],
   theme: {
     extend: {
-      fontFamily: {
-        sans: ['Inter', 'sans-serif'],
-        display: ['Outfit', 'sans-serif'],
+      screens: {
+        'xs': '375px',     // Small phones (iPhone SE)
+        'sm': '640px',     // Standard phones
+        'md': '768px',     // Tablets
+        'lg': '1024px',    // Laptops
+        'xl': '1280px',    // Desktops
+        '2xl': '1536px',   // Large Monitors
       },
-      colors: {
-        background: '#030303',
-        surface: '#0A0A0A',
-        accent: {
-          DEFAULT: '#D4AF37', // Executive Gold
-          light: '#FFF8E1',
-          dark: '#8A6D3B',
-        },
-        secondary: '#A1A1AA',
-      },
-      animation: {
-        'shimmer': 'shimmer 2s linear infinite',
-        'spotlight': 'spotlight 2s ease .75s 1 forwards',
-      },
-      keyframes: {
-        shimmer: {
-          from: { backgroundPosition: '0 0' },
-          to: { backgroundPosition: '-200% 0' },
-        },
-        spotlight: {
-          "0%": { opacity: 0, transform: "translate(-72%, -62%) scale(0.5)" },
-          "100%": { opacity: 1, transform: "translate(-50%,-40%) scale(1)" },
+      // Ensure your container is always centered and padded on mobile
+      container: {
+        center: true,
+        padding: {
+          DEFAULT: '1rem',
+          sm: '2rem',
+          lg: '4rem',
         },
       },
     },

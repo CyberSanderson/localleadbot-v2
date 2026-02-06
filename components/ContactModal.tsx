@@ -5,7 +5,7 @@ import { X, Loader2, CheckCircle, ArrowRight, ShieldCheck } from 'lucide-react';
 interface ContactModalProps {
   isOpen: boolean;
   onClose: () => void;
-  mode: 'audit' | 'apply'; // New prop to handle dual-intent
+  mode: 'audit' | 'apply';
 }
 
 export const ContactModal = ({ isOpen, onClose, mode }: ContactModalProps) => {
@@ -13,7 +13,6 @@ export const ContactModal = ({ isOpen, onClose, mode }: ContactModalProps) => {
   const [loadingIndex, setLoadingIndex] = useState(0);
   const [protocolId, setProtocolId] = useState("");
 
-  // Theatrical loading messages
   const loadingMessages = [
     "Scanning Domain Infrastructure...",
     "Mapping Local Competitor Rankings...",
@@ -21,23 +20,21 @@ export const ContactModal = ({ isOpen, onClose, mode }: ContactModalProps) => {
     "Finalizing Growth Protocol..."
   ];
 
-  // Dynamic content based on button clicked
   const content = {
     audit: {
       title: "Request Audit",
       sub: "We limit partners to 3 per region. Enter your details to check availability.",
       btn: "Run Analysis",
-      subject: "New LocalLeadBot Audit Request!"
+      subject: "New LocalLeadBot Audit Request (localleadbot.com)"
     },
     apply: {
       title: "Partnership Intake",
       sub: "Exclusivity guaranteed for selected firms. Apply for territory dominance.",
       btn: "Submit Application",
-      subject: "New LocalLeadBot Partnership Application!"
+      subject: "New Partnership Application (localleadbot.com)"
     }
   };
 
-  // Cycle through loading messages
   useEffect(() => {
     if (step === 'submitting') {
       const interval = setInterval(() => {
@@ -47,7 +44,6 @@ export const ContactModal = ({ isOpen, onClose, mode }: ContactModalProps) => {
     }
   }, [step]);
 
-  // Generate a Reference ID on success
   const generateId = () => {
     const random = Math.floor(1000 + Math.random() * 9000);
     setProtocolId(`PX-${random}-LLM`);
@@ -83,6 +79,11 @@ export const ContactModal = ({ isOpen, onClose, mode }: ContactModalProps) => {
     setStep('form');
     setLoadingIndex(0);
     onClose();
+  };
+
+  // Force redirect to .com to solidify the brand move
+  const handleFinalRedirect = () => {
+    window.location.href = "https://localleadbot.com";
   };
 
   return (
@@ -176,14 +177,13 @@ export const ContactModal = ({ isOpen, onClose, mode }: ContactModalProps) => {
                       Your site has been queued for analysis. A strategist will contact you within 24 hours.
                     </p>
                     
-                    {/* Protocol ID Badge */}
                     <div className="mb-6 px-3 py-1 bg-white/5 rounded border border-white/10 flex items-center gap-2">
                        <ShieldCheck className="w-3 h-3 text-amber-500" />
                        <span className="text-[10px] font-mono text-gray-500 tracking-tighter">PROTOCOL ID: {protocolId}</span>
                     </div>
 
                     <button 
-                      onClick={reset}
+                      onClick={handleFinalRedirect}
                       className="text-sm text-[#D4AF37] hover:text-white transition-colors underline underline-offset-4"
                     >
                       Return to Command Center
