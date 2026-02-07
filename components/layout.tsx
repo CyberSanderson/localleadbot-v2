@@ -6,18 +6,18 @@ interface LayoutProps {
 }
 
 export const Layout = ({ children }: LayoutProps) => {
-  const siteUrl = "https://www.localleadbot.com/";
+  const siteUrl = "https://www.localleadbot.pro/";
   const description = "We engineer local market dominance for Law, Medical, and Home Service firms. LocalLeadBot installs proprietary AI Sales Agents and high-performance Revenue Hubs.";
 
   return (
     <HelmetProvider>
       <Helmet>
-        {/* Core Identity */}
+        {/* Core Identity Lock */}
         <title>LocalLeadBot | AI Growth Infrastructure & Revenue Automation</title>
         <meta name="description" content={description} />
         <link rel="canonical" href={siteUrl} />
         
-        {/* Open Graph / LinkedIn (Website Classification) */}
+        {/* Open Graph (Website Identity) */}
         <meta property="og:type" content="website" />
         <meta property="og:url" content={siteUrl} />
         <meta property="og:title" content="LocalLeadBot | AI Growth Infrastructure" />
@@ -31,7 +31,6 @@ export const Layout = ({ children }: LayoutProps) => {
         <meta name="twitter:description" content="Engineering local dominance for professional service firms." />
         <meta name="twitter:image" content={`${siteUrl}og-image.webp`} />
 
-        {/* System Settings */}
         <meta name="theme-color" content="#030303" />
         <meta name="robots" content="index, follow" />
       </Helmet>
