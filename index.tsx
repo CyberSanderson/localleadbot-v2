@@ -1,5 +1,5 @@
 import React from 'react';
-import { createRoot } from 'react-dom/client';
+import { createRoot } from 'react-dom'; // Match the 'react-dom' key in your import map
 import App from './App.tsx';
 
 const rootElement = document.getElementById('root');
