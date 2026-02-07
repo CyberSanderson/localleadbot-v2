@@ -11,8 +11,11 @@ export const Layout = ({ children }: LayoutProps) => {
       <Helmet>
         {/* Core SEO - High-Authority Messaging */}
         <title>LocalLeadBot | AI Growth Infrastructure & Revenue Automation</title>
-        <meta name="description" content="We engineer local market dominance. LocalLeadBot installs proprietary AI Sales Agents and high-performance Revenue Hubs for professional firms." />
-        <meta name="keywords" content="Growth Infrastructure, AI Sales Agent, Revenue Automation, Local SEO, Client Acquisition Systems, Law Firm Marketing, Medical Practice Growth" />
+<meta name="description" content="We engineer local market dominance for Law, Medical, and Home Service firms. LocalLeadBot installs proprietary AI Sales Agents and high-performance Revenue Hubs." />
+
+<meta property="og:type" content="website" />
+<meta property="og:description" content="We engineer local market dominance for Law, Medical, and Home Service firms. LocalLeadBot installs proprietary AI Sales Agents and high-performance Revenue Hubs." />
+<meta property="og:title" content="LocalLeadBot | AI Growth Infrastructure" />
 
         {/* The 'Identity Lock': Absolute URL with trailing slash */}
         <link rel="canonical" href="https://www.localleadbot.com/" />
