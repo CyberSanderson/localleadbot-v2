@@ -1,13 +1,8 @@
 import React from 'react';
-import { createRoot } from 'react-dom'; // Match the 'react-dom' key in your import map
-import App from './App.tsx';
+import ReactDOM from 'react-dom/client'; // Use 'client' for createRoot
+import App from './App'; // No need for .tsx extension here usually
 
-const rootElement = document.getElementById('root');
-if (!rootElement) {
-  throw new Error("Could not find root element to mount to");
-}
-
-const root = createRoot(rootElement);
+const root = ReactDOM.createRoot(document.getElementById('root')!);
 root.render(
   <React.StrictMode>
     <App />
