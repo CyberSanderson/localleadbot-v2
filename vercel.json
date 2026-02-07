@@ -1,15 +1,15 @@
 {
   "redirects": [
     {
-      "source": "/(.*)",
-      "has": [
-        {
-          "type": "host",
-          "value": "localleadbot.com"
-        }
-      ],
-      "destination": "https://www.localleadbot.com/$1",
+      "source": "/:path((?!$|index\\.html|og-image\\.webp|sitemap\\.xml|robots\\.txt).*)",
+      "destination": "/",
       "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ]
 }
