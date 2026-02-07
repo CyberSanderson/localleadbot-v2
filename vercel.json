@@ -1,0 +1,15 @@
+{
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "localleadbot.com"
+        }
+      ],
+      "destination": "https://www.localleadbot.com/$1",
+      "permanent": true
+    }
+  ]
+}
