@@ -5,35 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
     <link rel="canonical" href="https://www.localleadbot.pro/" />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://www.localleadbot.pro/" />
-
-    <title>LocalLeadBot | AI Growth Infrastructure & Revenue Automation</title>
-    <meta name="description" content="We engineer local market dominance for Law, Medical, and Home Service firms. LocalLeadBot installs proprietary AI Sales Agents and high-performance Revenue Hubs." />
-
-    <meta property="og:title" content="LocalLeadBot | AI Growth Infrastructure" />
-    <meta property="og:description" content="We engineer local market dominance for Law, Medical, and Home Service firms. LocalLeadBot installs proprietary AI Sales Agents and high-performance Revenue Hubs." />
-    <meta property="og:image" content="https://www.localleadbot.pro/og-image.webp" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:site_name" content="LocalLeadBot" />
-
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="LocalLeadBot | Capture. Convert. Conquer." />
-    <meta name="twitter:description" content="Engineering local dominance for professional service firms." />
-    <meta name="twitter:image" content="https://www.localleadbot.pro/og-image.webp" />
-
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "ProfessionalService",
-      "name": "LocalLeadBot",
-      "url": "https://www.localleadbot.pro/",
-      "logo": "https://www.localleadbot.pro/og-image.webp",
-      "priceRange": "$$$",
-      "description": "AI Growth Infrastructure & Revenue Automation for professional firms."
-    }
-    </script>
+    <title>LocalLeadBot | AI Growth Infrastructure</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -45,75 +17,26 @@
         darkMode: 'class',
         theme: {
           extend: {
-            fontFamily: {
-              sans: ['Inter', 'sans-serif'],
-              display: ['Outfit', 'sans-serif'],
-            },
-            colors: {
-              background: '#030303',
-              surface: '#0A0A0A',
-              primary: '#FFFFFF',
-              secondary: '#A1A1AA',
-              accent: '#D4AF37',
-            },
-            animation: {
-              'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-            }
+            colors: { background: '#030303', surface: '#0A0A0A', accent: '#D4AF37' }
           }
         }
       }
     </script>
 
-    <style>
-      body {
-        background-color: #030303;
-        color: #ffffff;
-        overflow-x: hidden;
-      }
-      .shimmer {
-        position: relative;
-        overflow: hidden;
-      }
-      .shimmer::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        transform: translateX(-100%);
-        background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.1), transparent);
-        animation: shimmer-fast 2s infinite;
-      }
-      @keyframes shimmer-fast {
-        100% { transform: translateX(100%); }
-      }
-      ::-webkit-scrollbar { width: 8px; }
-      ::-webkit-scrollbar-track { background: #030303; }
-      ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
-      .glass {
-        background: rgba(10, 10, 10, 0.7);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-      }
-    </style>
-
     <script type="importmap">
     {
       "imports": {
         "react": "https://esm.sh/react@18.2.0",
-        "react/": "https://esm.sh/react@18.2.0/",
-        "react-dom": "https://esm.sh/react-dom@18.2.0?deps=react@18.2.0",
-        "react-dom/client": "https://esm.sh/react-dom@18.2.0/client?deps=react@18.2.0",
-        "lucide-react": "https://esm.sh/lucide-react@0.292.0?deps=react@18.2.0",
-        "framer-motion": "https://esm.sh/framer-motion@10.16.4?deps=react@18.2.0,react-dom@18.2.0",
-        "react-helmet-async": "https://esm.sh/react-helmet-async@1.3.0?deps=react@18.2.0",
-        "clsx": "https://esm.sh/clsx@2.0.0",
-        "tailwind-merge": "https://esm.sh/tailwind-merge@2.1.0"
+        "react-dom": "https://esm.sh/react-dom@18.2.0",
+        "lucide-react": "https://esm.sh/lucide-react@0.292.0",
+        "framer-motion": "https://esm.sh/framer-motion@10.16.4",
+        "react-helmet-async": "https://esm.sh/react-helmet-async@1.3.0"
       }
     }
     </script>
   </head>
   <body>
     <div id="root"></div>
-    <script type="module" src="./index.tsx"></script>
+    <script type="module" src="/src/index.tsx"></script>
   </body>
 </html>

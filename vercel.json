@@ -1,11 +1,6 @@
 {
-  "redirects": [
-    {
-      "source": "/:path((?!$|index\\.html|og-image\\.webp|sitemap\\.xml|robots\\.txt).*)",
-      "destination": "/",
-      "permanent": true
-    }
-  ],
+  "cleanUrls": true,
+  "trailingSlash": false,
   "rewrites": [
     {
       "source": "/(.*)",
