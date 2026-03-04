@@ -11,7 +11,9 @@ export default defineConfig(({ mode }) => {
         fs: {
           strict: false
         },
-        historyApiFallback: true // <-- Add this for SPA routing
+        historyApiFallback: {
+          disableDotRule: true,
+        }, // Correct SPA fallback for Vite
       },
       plugins: [react()],
       define: {
