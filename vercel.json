@@ -1,13 +1,6 @@
 {
   "cleanUrls": true,
   "trailingSlash": false,
-  "redirects": [
-    {
-      "source": "/blog/(.*)",
-      "destination": "/",
-      "permanent": true
-    }
-  ],
   "rewrites": [
     {
       "source": "/((?!api/|static/|favicon.ico|og-image.webp|sitemap.xml|robots.txt|_next/).*)",
