@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
 import { cn } from '../lib/utils.ts';
 import { Menu, X, ArrowRight } from 'lucide-react';
@@ -34,20 +35,23 @@ export const Navbar = ({ onOpenModal }: NavbarProps) => {
       >
         <div className="relative w-full max-w-4xl glass rounded-full px-6 py-3 flex items-center justify-between shadow-2xl shadow-black/40">
           {/* Logo */}
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-amber-400 to-yellow-600 flex items-center justify-center">
-              <span className="font-display font-bold text-lg text-black">L</span>
-            </div>
-            <span className="font-display font-semibold text-white tracking-wide hidden sm:block">
+          <Link to="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+            <img 
+              src="/local-lead-bot-logo.png" 
+              alt="LocalLeadBot Logo" 
+              className="w-8 h-8 md:w-10 md:h-10 object-contain"
+            />
+            <span className="font-display font-semibold text-white tracking-wide hidden sm:block text-sm md:text-base">
               LocalLeadBot
             </span>
-          </div>
+          </Link>
 
           {/* Desktop Links */}
           <div className="hidden md:flex items-center gap-8 text-sm font-medium text-gray-400">
-            <a href="#services" className="hover:text-white transition-colors duration-200">Capabilities</a>
-            <a href="#process" className="hover:text-white transition-colors duration-200">The Engine</a>
-            <a href="#results" className="hover:text-white transition-colors duration-200">Results</a>
+            <Link to="/solutions/law-firms" className="hover:text-white transition-colors duration-200">Law Firms</Link>
+            <Link to="/solutions/medical-practices" className="hover:text-white transition-colors duration-200">Medical</Link>
+            <Link to="/solutions/home-services" className="hover:text-white transition-colors duration-200">Home Services</Link>
+            <Link to="/resources" className="hover:text-white transition-colors duration-200">Resources</Link>
           </div>
 
           {/* CTA */}
@@ -56,7 +60,7 @@ export const Navbar = ({ onOpenModal }: NavbarProps) => {
                onClick={onOpenModal}
                className="hidden md:flex items-center gap-2 text-white bg-white/5 hover:bg-white/10 border border-white/10 px-4 py-1.5 rounded-full text-xs font-medium transition-all group"
              >
-               Start Engine
+               Get Started
                <ArrowRight className="w-3 h-3 text-accent group-hover:translate-x-0.5 transition-transform" />
              </button>
              
@@ -76,9 +80,10 @@ export const Navbar = ({ onOpenModal }: NavbarProps) => {
           className="fixed inset-0 z-40 bg-black pt-24 px-6 md:hidden"
         >
           <div className="flex flex-col gap-6 text-xl font-display text-gray-300">
-            <a href="#services" onClick={() => setMobileMenuOpen(false)}>Capabilities</a>
-            <a href="#process" onClick={() => setMobileMenuOpen(false)}>The Engine</a>
-            <a href="#results" onClick={() => setMobileMenuOpen(false)}>Results</a>
+            <Link to="/solutions/law-firms" onClick={() => setMobileMenuOpen(false)} className="hover:text-white transition-colors">Law Firms</Link>
+            <Link to="/solutions/medical-practices" onClick={() => setMobileMenuOpen(false)} className="hover:text-white transition-colors">Medical Practices</Link>
+            <Link to="/solutions/home-services" onClick={() => setMobileMenuOpen(false)} className="hover:text-white transition-colors">Home Services</Link>
+            <Link to="/resources" onClick={() => setMobileMenuOpen(false)} className="hover:text-white transition-colors">Resources</Link>
             <hr className="border-white/10"/>
             <button 
               onClick={() => {
@@ -87,7 +92,7 @@ export const Navbar = ({ onOpenModal }: NavbarProps) => {
               }}
               className="w-full py-4 bg-white text-black font-semibold rounded-lg"
             >
-              Start Your Growth
+              Get Started
             </button>
           </div>
         </motion.div>

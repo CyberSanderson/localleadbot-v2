@@ -64,7 +64,7 @@ export const Hero = ({ onOpenModal }: HeroProps) => {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="mt-6 max-w-2xl text-lg md:text-xl text-secondary leading-relaxed"
         >
-          The boutique growth agency for Home Services, Medical, and Legal firms. We install our proprietary <span className="text-white font-medium">Automated Revenue Infrastructure</span> to capture, convert, and conquer your territory.
+          AI-powered lead generation for <span className="text-white font-medium">law firms, medical practices, and home service companies</span>. We capture high-intent prospects, qualify leads automatically, and deliver warm clients ready to convert.
         </motion.p>
 
         {/* CTAs */}
