@@ -3,10 +3,13 @@
   "outputDirectory": "dist",
   "cleanUrls": true,
   "trailingSlash": false,
-  "rewrites": [
+  "routes": [
     {
-      "source": "/(?!(?:api|_next|static|public|.*\\.)(.*?))(.*)",
-      "destination": "/index.html"
+      "handle": "filesystem"
+    },
+    {
+      "src": "/(?!.*\\.)",
+      "dest": "/index.html"
     }
   ]
 }
