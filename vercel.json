@@ -1,9 +1,11 @@
 {
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
   "cleanUrls": true,
   "trailingSlash": false,
   "rewrites": [
     {
-      "source": "/((?!api/|static/|favicon.ico|og-image.webp|sitemap.xml|robots.txt|_next/).*)",
+      "source": "/(?!(?:api|_next|static|public|.*\\.)(.*?))(.*)",
       "destination": "/index.html"
     }
   ]
