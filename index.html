@@ -40,6 +40,18 @@
         }
       }
     </script>
+    <script>
+      (function () {
+        var search = window.location.search;
+        if (search && search.indexOf('?p=') === 0) {
+          var params = new URLSearchParams(search);
+          var path = params.get('p') || '/';
+          var query = params.get('q');
+          var newUrl = path + (query ? '?' + query : '') + window.location.hash;
+          window.history.replaceState(null, '', newUrl);
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>
