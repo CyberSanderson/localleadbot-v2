@@ -1,9 +1,10 @@
 {
-  "cleanUrls": true,
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
   "trailingSlash": false,
   "rewrites": [
     {
-      "source": "/((?!assets/|vite.svg|favicon.png|og-image.webp).*)",
+      "source": "/(.*)",
       "destination": "/index.html"
     }
   ]
