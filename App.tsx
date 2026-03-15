@@ -16,6 +16,7 @@ import { BlogLeadGeneration } from './components/blog/BlogLeadGeneration';
 import { BlogAIvTraditional } from './components/blog/BlogAIvTraditional';
 import { ResourcesHub } from './components/pages/ResourcesHub';
 import { ScrollToTop } from './components/ScrollToTop';
+import { ChatbotWidget } from './components/ChatbotWidget';
 
 // Home Page Component
 function HomePage() {
@@ -108,6 +109,7 @@ function App() {
           onClose={() => setIsModalOpen(false)} 
           mode={modalMode}
         />
+        <ChatbotWidget />
       </Layout>
     </Router>
   );
